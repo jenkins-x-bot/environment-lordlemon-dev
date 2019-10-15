@@ -1,0 +1,7 @@
+dependencies:
+- host: github.com
+  owner: cloudbees
+  repo: arcalosui-frontend
+  url: https://github.com/cloudbees/arcalosui-frontend
+  version: 0.0.52
+  versionURL: ""
