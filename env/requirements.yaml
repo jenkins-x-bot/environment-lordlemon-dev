@@ -1,7 +1,7 @@
 dependencies:
 - name: arcalosui
   repository: https://storage.googleapis.com/chartmuseum.jenkins-x.io
-  version: 0.0.69
+  version: 0.0.72
 - name: jxboot-resources
   repository: https://storage.googleapis.com/chartmuseum.jenkins-x.io
   version: 0.0.14
