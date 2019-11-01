@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: boot-tenant-service
+spec:
+  rules:
+  - host: boot-tenant-service{{ .Values.cluster.namespaceSubDomain }}{{ .Values.cluster.domain }}
+    http:
+      paths:
+      - backend:
+          serviceName: jx-tenant-service
+          servicePort: 80
+        path: /api/v1/(domain|nameservers|version|repositories|git/tokens).*$
+{{- if .Values.cluster.tls }}
+  tls:
+  - hosts:
+    - boot-tenant-service{{ .Values.cluster.namespaceSubDomain }}{{ .Values.cluster.domain }}
+{{- if eq .Values.certmanager.production "true" }}
+    secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-p"
+{{- else }}
+    secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-s"
+{{- end }}
+{{- end }}
